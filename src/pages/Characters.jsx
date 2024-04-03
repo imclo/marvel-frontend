@@ -34,20 +34,22 @@ const Characters = () => {
           <div className="card-container">
             {data.results.map((character) => {
               return (
-                <article className="comic-card" key={character._id}>
+                <article className="character-card" key={character._id}>
                   <div className="name-character">
                     <h2>{character.name}</h2>
                   </div>
-                  <div className="picture-characters">
-                    <img
-                      src={
-                        character.thumbnail.path +
-                        "." +
-                        character.thumbnail.extension
-                      }
-                      alt="characters-marvel"
-                    />
-                  </div>
+                  <Link to={`/character/${character._id}`}>
+                    <div className="picture-characters">
+                      <img
+                        src={
+                          character.thumbnail.path +
+                          "." +
+                          character.thumbnail.extension
+                        }
+                        alt="characters-marvel"
+                      />
+                    </div>
+                  </Link>
                 </article>
               );
             })}
