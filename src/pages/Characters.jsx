@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
-const Characters = () => {
+const Characters = ({ handleAddToFav }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -52,26 +52,16 @@ const Characters = () => {
             {data.results.map((character) => {
               return (
                 <article className="character-card" key={character._id}>
-                  <FontAwesomeIcon
-                    className="icon-heart"
-                    icon="fa-solid fa-heart"
+                  <div
                     onClick={() => {
-                      //data id => string
-                      const newFavoriteId =
-                        JSON.stringify(data._id) + "-character";
-                      // change cookie string
-                      console.log(
-                        "sticker, fav avant: ",
-                        Cookies.get("favorites")
-                      );
-                      const newFavorites =
-                        Cookies.get("favorites") === undefined
-                          ? ""
-                          : Cookies.get("favorites") + newFavoriteId + " ; ";
-                      // change cookie string
-                      Cookies.set("favorites", newFavorites);
+                      handleAddToFav(character);
                     }}
-                  />
+                  >
+                    <FontAwesomeIcon
+                      className="icon-heart"
+                      icon="fa-solid fa-heart"
+                    />
+                  </div>
                   <div className="name-character">
                     <div className="name-char">
                       <h2>{character.name}</h2>

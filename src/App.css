@@ -20,6 +20,7 @@ header {
   display: flex;
   /* border: solid 2px red; */
   background-color: #202020;
+  border-bottom: solid 1px white;
 }
 
 .header-container {
@@ -124,7 +125,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   padding: 0 6px 16px;
 }
 
@@ -140,9 +141,13 @@ header {
   text-decoration: none;
 }
 
+.character-card:hover {
+  transform: scale(1.1);
+}
+
 .name-character {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
   background-color: #202020;
@@ -306,9 +311,13 @@ header {
   text-decoration: none;
 }
 
+.comic-card:hover {
+  transform: scale(1.1);
+}
+
 .title-comic {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
   background-color: #202020;
@@ -410,4 +419,22 @@ header {
   font-size: 40px;
   padding: 25px;
   text-shadow: #202020 1px 0 10px;
+}
+
+.card-wrapper .ur-fav {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  border: solid 2px #ee161e;
+  color: #202020;
+  margin-bottom: 30px;
+}
+
+.fav-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 6px 16px;
 }
