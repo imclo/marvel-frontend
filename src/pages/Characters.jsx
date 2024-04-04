@@ -3,6 +3,10 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
+import Cookies from "js-cookie";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
@@ -41,15 +45,37 @@ const Characters = () => {
           <div className="characters-title">
             <p>MARVEL CHARACTERS</p>
           </div>
+          <Search setSearch={setSearch} search={search} />
         </div>
         <div className="card-wrapper">
-          <Search setSearch={setSearch} search={search} />
           <div className="card-container">
             {data.results.map((character) => {
               return (
                 <article className="character-card" key={character._id}>
+                  <FontAwesomeIcon
+                    className="icon-heart"
+                    icon="fa-solid fa-heart"
+                    onClick={() => {
+                      //data id => string
+                      const newFavoriteId =
+                        JSON.stringify(data._id) + "-character";
+                      // change cookie string
+                      console.log(
+                        "sticker, fav avant: ",
+                        Cookies.get("favorites")
+                      );
+                      const newFavorites =
+                        Cookies.get("favorites") === undefined
+                          ? ""
+                          : Cookies.get("favorites") + newFavoriteId + " ; ";
+                      // change cookie string
+                      Cookies.set("favorites", newFavorites);
+                    }}
+                  />
                   <div className="name-character">
-                    <h2>{character.name}</h2>
+                    <div className="name-char">
+                      <h2>{character.name}</h2>
+                    </div>
                   </div>
                   <Link to={`/character/${character._id}`}>
                     <div className="picture-characters">

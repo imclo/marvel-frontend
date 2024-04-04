@@ -69,6 +69,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 /* HERO */
@@ -112,7 +113,7 @@ header {
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin: 20px auto auto;
+  margin: 30px auto auto;
   width: 1280px;
   justify-content: center;
   align-items: center;
@@ -153,6 +154,10 @@ header {
   justify-content: center;
 }
 
+.name-char {
+  width: 150px;
+}
+
 .picture-characters,
 .picture-comic {
   height: 80%;
@@ -176,6 +181,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .characters-title {
@@ -210,7 +216,7 @@ header {
 .hero-card .hero-name {
   font-size: 30px;
   font-family: "Alumni Sans Inline One", sans-serif;
-  color: #ee161e;
+  color: white;
   background-color: #202020;
   padding: 15px;
   border-radius: 10px;
@@ -270,12 +276,6 @@ header {
 }
 
 .search {
-  /* 
-  font-size: 16px;
-  width: 600px;
-  height: 50px;
-  border: solid 2px #202020;
-  border-radius: 5px; */
   font-family: "Roboto Condensed", sans-serif;
   background-color: #f5f6f7;
   border: none;
@@ -331,13 +331,23 @@ header {
   justify-content: center;
 }
 
-.pagination button,
-.pagination span {
+.pagination button {
   font-size: 16px;
   border: 1px solid #202020;
   margin: 0 0.5rem;
   background-color: transparent;
   color: #202020;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-size: 16px;
+  border: 1px solid #202020;
+  margin: 0 0.5rem;
+  background-color: #202020;
+  color: white;
   padding: 8px;
   border-radius: 5px;
   cursor: pointer;
@@ -356,4 +366,48 @@ header {
 .pagination button:disabled:hover {
   background-color: transparent;
   color: #202020;
+}
+
+/* FAVORITES */
+
+.icon-heart {
+  position: absolute;
+  color: white;
+  margin-top: 10px;
+  margin-left: 250px;
+  font-size: 20px;
+  border: solid 2px white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.icon-heart:hover {
+  color: #ee161e;
+  background-color: lightgray;
+}
+
+.favorite-background {
+  width: 100%;
+  height: 455px;
+  object-fit: cover;
+  background-image: url(https://mrwallpaper.com/images/hd/4k-avengers-marvel-comic-characters-7axoe5jj55k4tgcf.jpg);
+  text-shadow: #202020 1px 0 10px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fav-title {
+  font-family: "Roboto Condensed", sans-serif;
+  color: white;
+  height: 60px;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  padding: 25px;
+  text-shadow: #202020 1px 0 10px;
 }

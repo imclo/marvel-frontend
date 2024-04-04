@@ -3,6 +3,10 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
+import Cookies from "js-cookie";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
@@ -41,15 +45,37 @@ const Comics = () => {
           <div className="characters-title">
             <p>COMICS COLLECTION</p>
           </div>
+          <Search setSearch={setSearch} search={search} />
         </div>
         <div className="card-wrapper">
-          <Search setSearch={setSearch} search={search} />
           <div className="card-container">
             {data.results.map((comic) => {
               return (
                 <article className="comic-card" key={comic._id}>
+                  <FontAwesomeIcon
+                    className="icon-heart"
+                    icon="fa-solid fa-heart"
+                    onClick={() => {
+                      //data id => string
+                      const newFavoriteId =
+                        JSON.stringify(data._id) + "-character";
+                      // change cookie string
+                      console.log(
+                        "sticker, fav avant: ",
+                        Cookies.get("favorites")
+                      );
+                      const newFavorites =
+                        Cookies.get("favorites") === undefined
+                          ? ""
+                          : Cookies.get("favorites") + newFavoriteId + " ; ";
+                      // change cookie string
+                      Cookies.set("favorites", newFavorites);
+                    }}
+                  />
                   <div className="title-comic">
-                    <h2>{comic.title}</h2>
+                    <div className="name-char">
+                      <h2>{comic.title}</h2>
+                    </div>
                   </div>
                   <Link to={`/comic/${comic._id}`}>
                     <div className="picture-comic">
