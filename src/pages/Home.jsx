@@ -7,7 +7,7 @@ const Home = () => {
         <div className="picture-background">
           <div className="hero-container">
             <div className="hero-title">
-              <p>Welcome to Marvel Universe!</p>
+              <p>WELCOME TO OUR UNIVERSE!</p>
             </div>
           </div>
         </div>

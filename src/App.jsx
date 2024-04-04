@@ -12,6 +12,10 @@ import Character from "./pages/Character";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+library.add(faMagnifyingGlass);
+
 function App() {
   const [search, setSearch] = useState("");
 

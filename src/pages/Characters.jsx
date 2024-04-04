@@ -4,12 +4,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import Search from "../components/Search";
+import Pagination from "../components/Pagination";
 
 const Characters = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   const limit = 100;
 
@@ -35,6 +37,11 @@ const Characters = () => {
   ) : (
     <>
       <main>
+        <div className="characters-background">
+          <div className="characters-title">
+            <p>MARVEL CHARACTERS</p>
+          </div>
+        </div>
         <div className="card-wrapper">
           <Search setSearch={setSearch} search={search} />
           <div className="card-container">
@@ -61,6 +68,14 @@ const Characters = () => {
             })}
           </div>
         </div>
+        <Pagination
+          skip={skip}
+          setSkip={setSkip}
+          count={data.count}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </main>
     </>
   );
