@@ -1,28 +1,34 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Search from "../components/Search";
-
 import { Link } from "react-router-dom";
+
+import Search from "../components/Search";
 
 const Comics = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [skip, setSkip] = useState(0);
+  const [search, setSearch] = useState("");
+
+  const limit = 100;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/comics`);
+        const response = await axios.get(
+          `http://localhost:3000/comics?limit=${limit}&skip=${skip}&title=${search}`
+        );
         // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
 
     fetchData();
-  }, []);
+  }, [skip, search]);
 
   return isLoading ? (
     <p>Loading...</p>
@@ -30,7 +36,7 @@ const Comics = () => {
     <>
       <main>
         <div className="card-wrapper">
-          <Search />
+          <Search setSearch={setSearch} search={search} />
           <div className="card-container">
             {data.results.map((comic) => {
               return (

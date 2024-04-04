@@ -210,6 +210,23 @@ header {
   border-radius: 10px;
 }
 
+/* COMIC */
+
+.hero-card .comic-name {
+  font-size: 30px;
+  font-family: "Alumni Sans Inline One", sans-serif;
+  color: #ffd366;
+  background-color: #202020;
+  padding: 15px;
+  border-radius: 10px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 /* SEARCH */
 
 .input-search {

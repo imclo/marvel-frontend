@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+
 const Character = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +13,7 @@ const Character = () => {
   const id = params.id;
 
   useEffect(() => {
-    const fechData = async () => {
+    const fetchData = async () => {
       try {
         const characterResponse = await axios.get(
           `http://localhost:3000/character/${id}`
@@ -30,7 +32,7 @@ const Character = () => {
         setIsLoading(false);
       }
     };
-    fechData();
+    fetchData();
   }, [id]);
 
   return isLoading ? (
@@ -48,6 +50,7 @@ const Character = () => {
             />
           </div>
         </div>
+
         <div className="card-container">
           {data.title}
           {comics.map((comic) => (
@@ -55,12 +58,14 @@ const Character = () => {
               <div className="title-comic">
                 <h2>{comic.title}</h2>
               </div>
-              <div className="picture-comic">
-                <img
-                  src={comic.thumbnail.path + "." + comic.thumbnail.extension}
-                  alt="comic-title"
-                />
-              </div>
+              <Link to={`/comic/${comic._id}`}>
+                <div className="picture-comic">
+                  <img
+                    src={comic.thumbnail.path + "." + comic.thumbnail.extension}
+                    alt="comic-title"
+                  />
+                </div>
+              </Link>
             </div>
           ))}
         </div>

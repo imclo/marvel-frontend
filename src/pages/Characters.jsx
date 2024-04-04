@@ -8,11 +8,17 @@ import Search from "../components/Search";
 const Characters = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [skip, setSkip] = useState(0);
+  const [search, setSearch] = useState("");
+
+  const limit = 100;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/characters`);
+        const response = await axios.get(
+          `http://localhost:3000/characters?limit=${limit}&skip=${skip}&name=${search}`
+        );
         // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
@@ -22,7 +28,7 @@ const Characters = () => {
     };
 
     fetchData();
-  }, []);
+  }, [skip, search]);
 
   return isLoading ? (
     <p>Loading...</p>
@@ -30,7 +36,7 @@ const Characters = () => {
     <>
       <main>
         <div className="card-wrapper">
-          <Search />
+          <Search setSearch={setSearch} search={search} />
           <div className="card-container">
             {data.results.map((character) => {
               return (

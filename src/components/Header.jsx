@@ -1,7 +1,13 @@
 import logo from "../assets/img/logo-marvel.png";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+import Search from "../components/Search";
 
 const Header = () => {
+  let location = useLocation();
+  console.log(location);
+
   return (
     <>
       <header>
