@@ -10,6 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
+const titleLenght = (text, maxLenght) => {
+  return text.length > maxLenght ? text.slice(0, maxLenght) + "..." : text;
+};
+
 const Comics = ({ handleAddToFavorites }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -65,7 +69,7 @@ const Comics = ({ handleAddToFavorites }) => {
                   </div>
                   <div className="title-comic">
                     <div className="name-char">
-                      <h2>{comic.title}</h2>
+                      <h2>{titleLenght(comic.title, 25)}</h2>
                     </div>
                   </div>
                   <Link to={`/comic/${comic._id}`}>
