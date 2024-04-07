@@ -3,7 +3,7 @@ import galaxy from "../assets/img/marvel-avenger.jpeg";
 import comics from "../assets/img/comics.jpeg";
 import marvelComics from "../assets/img/marvel-comics.jpeg";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
