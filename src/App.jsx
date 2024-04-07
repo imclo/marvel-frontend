@@ -27,7 +27,7 @@ function App() {
 
   const handleToken = (token) => {
     if (token) {
-      Cookies.set("token", token, { expires: 15 });
+      Cookies.set("token", token, { expires: 10 });
       setToken(token);
     } else {
       Cookies.remove("token");
@@ -67,16 +67,12 @@ function App() {
     }
   };
 
-  let favoriteId = [];
-
-  favorites.map((favorite) => {
-    return favoriteId.push(favorite.id);
-  });
-
-  const handleEraseFromFavorites = (id) => {
-    const updatedFavorites = favorites.filter((fav) => fav.id !== id);
+  const removeFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((fav) => fav._id !== id);
     setFavorites(updatedFavorites);
-    Cookies.set("favorites", JSON.stringify(updatedFavorites), { expires: 10 });
+    Cookies.set("favorites", JSON.stringify(updatedFavorites), {
+      expires: 5,
+    });
   };
 
   return (
@@ -92,8 +88,8 @@ function App() {
                 setSearch={setSearch}
                 search={search}
                 handleAddToFav={handleAddToFav}
-                favoriteId={favoriteId}
-                handleEraseFromFavorites={handleEraseFromFavorites}
+                removeFromFavorites={removeFromFavorites}
+                token={token}
               />
             }
           />
@@ -105,8 +101,8 @@ function App() {
                 setSearch={setSearch}
                 search={search}
                 handleAddToFavorites={handleAddToFavorites}
-                favoriteId={favoriteId}
-                handleEraseFromFavorites={handleEraseFromFavorites}
+                removeFromFavorites={removeFromFavorites}
+                token={token}
               />
             }
           />

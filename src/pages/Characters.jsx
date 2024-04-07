@@ -8,16 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
-const Characters = ({
-  handleAddToFav,
-  handleEraseFromFavorites,
-  favoriteId,
-}) => {
+const Characters = ({ handleAddToFav }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [fav, setFav] = useState(false);
 
   const limit = 100;
 
@@ -56,11 +53,8 @@ const Characters = ({
                 <article className="character-card" key={character._id}>
                   <div
                     onClick={() => {
-                      if (favoriteId.find((id) => id === character._id)) {
-                        handleEraseFromFavorites(character._id);
-                      } else {
-                        handleAddToFav(character);
-                      }
+                      handleAddToFav(character);
+                      setFav(!fav);
                     }}
                   >
                     <FontAwesomeIcon

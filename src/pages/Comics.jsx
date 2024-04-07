@@ -14,11 +14,7 @@ const titleLenght = (text, maxLenght) => {
   return text.length > maxLenght ? text.slice(0, maxLenght) + "..." : text;
 };
 
-const Comics = ({
-  handleAddToFavorites,
-  handleEraseFromFavorites,
-  favoriteId,
-}) => {
+const Comics = ({ handleAddToFavorites }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -62,11 +58,8 @@ const Comics = ({
                 <article className="comic-card" key={comic._id}>
                   <div
                     onClick={() => {
-                      if (favoriteId.find((id) => id === comic._id)) {
-                        handleEraseFromFavorites(comic._id);
-                      } else {
-                        handleAddToFavorites(comic);
-                      }
+                      handleAddToFavorites(comic);
+                      console.log("ok");
                     }}
                   >
                     <FontAwesomeIcon
