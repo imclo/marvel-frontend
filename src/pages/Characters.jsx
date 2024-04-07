@@ -3,19 +3,18 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
-import Cookies from "js-cookie";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
-const Characters = ({ handleAddToFav }) => {
+const Characters = ({ handleAddToFav, handleRemoveFav }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [fav, setFav] = useState(false);
 
   const limit = 100;
 
@@ -23,7 +22,7 @@ const Characters = ({ handleAddToFav }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/characters?limit=${limit}&skip=${skip}&name=${search}`
+          `https://site--marvel-backend--47xhmxvzybsz.code.run/characters?limit=${limit}&skip=${skip}&name=${search}`
         );
         // console.log(response.data);
         setData(response.data);
@@ -55,6 +54,7 @@ const Characters = ({ handleAddToFav }) => {
                   <div
                     onClick={() => {
                       handleAddToFav(character);
+                      setFav(!fav);
                     }}
                   >
                     <FontAwesomeIcon

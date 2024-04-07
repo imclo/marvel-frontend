@@ -16,11 +16,13 @@ const Character = () => {
     const fetchData = async () => {
       try {
         const characterResponse = await axios.get(
-          `http://localhost:3000/character/${id}`
+          `https://site--marvel-backend--47xhmxvzybsz.code.run/character/${id}`
         );
         const comicsResponse = await Promise.all(
           characterResponse.data.comics.map((comicId) =>
-            axios.get(`http://localhost:3000/comic/${comicId}`)
+            axios.get(
+              `https://site--marvel-backend--47xhmxvzybsz.code.run/comic/${comicId}`
+            )
           )
         );
         setData(characterResponse.data);

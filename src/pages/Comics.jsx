@@ -14,7 +14,7 @@ const titleLenght = (text, maxLenght) => {
   return text.length > maxLenght ? text.slice(0, maxLenght) + "..." : text;
 };
 
-const Comics = ({ handleAddToFavorites }) => {
+const Comics = ({ handleAddToFavorites, handleRemoveFav }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -27,7 +27,7 @@ const Comics = ({ handleAddToFavorites }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comics?limit=${limit}&skip=${skip}&title=${search}`
+          `https://site--marvel-backend--47xhmxvzybsz.code.run/comics?limit=${limit}&skip=${skip}&title=${search}`
         );
         // console.log(response.data);
         setData(response.data);
