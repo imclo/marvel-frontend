@@ -23,6 +23,17 @@ library.add(faMagnifyingGlass, faHeart);
 function App() {
   const [search, setSearch] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [token, setToken] = useState(Cookies.get("token") || null);
+
+  const handleToken = (token) => {
+    if (token) {
+      Cookies.set("token", token, { expires: 15 });
+      setToken(token);
+    } else {
+      Cookies.remove("token");
+      setToken(null);
+    }
+  };
 
   useEffect(() => {
     if (Cookies.get("favorites")) {
@@ -56,39 +67,22 @@ function App() {
     }
   };
 
-  // const removeFromFavorites = (id) => {
-  //   const updatedFavorites = favorites.filter((fav) => fav._id !== id);
-  //   updatedFavorites.slice(id);
-  //   setFavorites(updatedFavorites);
-  //   Cookies.remove("favorites", id);
-  // };
+  let favoriteId = [];
 
-  const handleRemoveFav = (id) => {
-    const fav = Cookies.get("fav");
-    const tabFav = fav && JSON.parse(fav);
+  favorites.map((favorite) => {
+    return favoriteId.push(favorite.id);
+  });
 
-    let newFav = [[], []];
-    for (let i = 0; i < tabFav.length; i++) {
-      for (let j = 0; j < tabFav[i].length; j++) {
-        if (i === 0) {
-          if (tabFav[i][j] !== id) {
-            newFav[0].push(tabFav[i][j]);
-          }
-        } else {
-          if (tabFav[i][j] !== id) {
-            newFav[1].push(tabFav[i][j]);
-          }
-        }
-      }
-    }
-    setFavorites(newFav);
-    Cookies.set("fav", JSON.stringify(newFav));
+  const handleEraseFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((fav) => fav.id !== id);
+    setFavorites(updatedFavorites);
+    Cookies.set("favorites", JSON.stringify(updatedFavorites), { expires: 10 });
   };
 
   return (
     <>
       <Router>
-        <Header />
+        <Header token={token} handleToken={handleToken} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -98,6 +92,8 @@ function App() {
                 setSearch={setSearch}
                 search={search}
                 handleAddToFav={handleAddToFav}
+                favoriteId={favoriteId}
+                handleEraseFromFavorites={handleEraseFromFavorites}
               />
             }
           />
@@ -109,18 +105,15 @@ function App() {
                 setSearch={setSearch}
                 search={search}
                 handleAddToFavorites={handleAddToFavorites}
+                favoriteId={favoriteId}
+                handleEraseFromFavorites={handleEraseFromFavorites}
               />
             }
           />
           <Route path="/comic/:id" element={<Comic />} />
           <Route
             path="/favorites"
-            element={
-              <Favorites
-                favorites={favorites}
-                handleRemoveFav={handleRemoveFav}
-              />
-            }
+            element={<Favorites favorites={favorites} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

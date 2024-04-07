@@ -43,7 +43,7 @@ const Favorites = ({ favorites, removeFromFavorites }) => {
                 <div key={elem._id} className="character-card">
                   <div
                     onClick={() => {
-                      removeFromFavorites(elem);
+                      removeFromFavorites(elem._id);
                     }}
                   >
                     <FontAwesomeIcon
@@ -68,10 +68,16 @@ const Favorites = ({ favorites, removeFromFavorites }) => {
               {/* Afficher les comics */}
               {comics.map((elem) => (
                 <div key={elem._id} className="comic-card">
-                  <FontAwesomeIcon
-                    className="icon-heart"
-                    icon="fa-solid fa-heart"
-                  />
+                  <div
+                    onClick={() => {
+                      removeFromFavorites(elem._id);
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      className="icon-heart"
+                      icon="fa-solid fa-heart"
+                    />
+                  </div>
                   <div className="title-comic">
                     <h2>{titleLenght(elem.title, 19)}</h2>
                   </div>

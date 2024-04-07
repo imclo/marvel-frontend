@@ -637,3 +637,14 @@ button {
   text-decoration: none;
   text-align: center;
 }
+
+.logout {
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: #c2175b;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  height: 30px;
+  outline: none;
+}
