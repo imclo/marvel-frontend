@@ -1,60 +1,35 @@
-import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({ handleToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-
-    if (!value.includes("@")) {
-      setError("Email doit contenir le symbole '@'");
-    } else {
-      setError("");
-    }
-  };
-
-  const handleUsernameChange = (event) => {
-    const value = event.target.value;
-    setUsername(value);
-  };
-
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // console.log(email, password, username);
     try {
+      setErrorMessage("");
       const response = await axios.post(
-        "https://site--marvel-backend--47xhmxvzybsz.code.run/user/signup",
-
+        `https://site--marvel-backend--47xhmxvzybsz.code.run/user/signup`,
         {
-          email: email,
-          username: username,
-          password: password,
+          username,
+          email,
+          password,
         }
       );
-
       handleToken(response.data.token);
-      console.log(response.data);
       navigate("/");
-    } catch (error) {
-      console.log(error.response.data);
 
-      if (error.response.status === 409) {
-        setError("This email already as an account, please use another one");
-      } else if (error.response.data.message === "Missing parameters") {
-        setError("Please fill in all the fields");
-      }
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -65,29 +40,29 @@ const Signup = ({ handleToken }) => {
         <input
           type="text"
           placeholder="Username"
-          name="username"
           value={username}
-          onChange={handleUsernameChange}
+          onChange={(event) => setUsername(event.target.value)}
         ></input>
         <input
           type="email"
           placeholder="Email"
-          name="mail"
           value={email}
-          onChange={handleEmailChange}
+          onChange={(event) => setEmail(event.target.value)}
         ></input>
         <input
           type="password"
           placeholder="Password"
-          name="password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(event) => setPassword(event.target.value)}
         ></input>
 
-        <button className="btn-valid" type="submit">
-          Sign up
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <input className="btn-valid" value="Sign up" type="submit" />
+
+        {errorMessage && (
+          <p className="email-used" style={{ color: "red" }}>
+            {errorMessage}
+          </p>
+        )}
         <Link to="/login" style={{ textDecoration: "none" }}>
           <p className="lien-signup">Already a member? Log-in!</p>
         </Link>

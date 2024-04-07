@@ -1,40 +1,32 @@
-import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const Login = ({ handleToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setErrorMessage("");
       const response = await axios.post(
-        "https://site--marvel-backend--47xhmxvzybsz.code.run/user/signup",
+        `https://site--marvel-backend--47xhmxvzybsz.code.run/user/login`,
         {
-          email: email,
-          password: password,
+          email,
+          password,
         }
       );
       handleToken(response.data.token);
       navigate("/");
-      console.log(response.data);
+      //   console.log(response.data);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     }
   };
-
   return (
     <div className="form-container">
       <h2>Log in</h2>
@@ -42,21 +34,23 @@ const Login = ({ handleToken }) => {
         <input
           type="email"
           placeholder="Email"
-          name="email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={(event) => setEmail(event.target.value)}
         />
-
         <input
           type="password"
           placeholder="Password"
-          name="password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(event) => setPassword(event.target.value)}
         />
 
         <div>
-          <input className="btn-valid" type="submit" value="Log in" />
+          <input className="btn-valid" value="Log in" type="submit" />
+          {errorMessage && (
+            <p className="email-used" style={{ color: "red" }}>
+              {errorMessage}
+            </p>
+          )}
         </div>
         <Link to="/signup" style={{ textDecoration: "none" }}>
           <p className="lien-signup">Are you new? Sign-up!</p>
