@@ -676,6 +676,7 @@ button {
   }
   .fav-container h3 {
     width: 100%;
+    padding: 0 150px;
   }
 }
 
@@ -683,6 +684,7 @@ button {
   .header-buttons {
     flex-wrap: wrap;
     justify-content: center;
+    padding-left: 20px;
   }
 
   .hero-container {
@@ -698,6 +700,6 @@ button {
 
 @media (max-width: 660px) {
   .search {
-    width: 100%;
+    width: 300px;
   }
 }
