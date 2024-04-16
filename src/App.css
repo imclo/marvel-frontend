@@ -332,6 +332,7 @@ header {
   width: 550px;
   margin-bottom: 20px;
   font-size: 18px;
+  color: black;
 }
 
 .css-background {
@@ -647,4 +648,37 @@ button {
   font-size: 12px;
   height: 30px;
   outline: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1310px) {
+  .card-wrapper {
+    width: 100%;
+  }
+  .fav-container h3 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .header-buttons {
+    flex-direction: column;
+  }
+
+  .hero-container {
+    width: 100%;
+  }
+
+  .character-row,
+  .comic-row {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .search {
+    width: 100%;
+  }
 }

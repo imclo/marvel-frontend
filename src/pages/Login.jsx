@@ -24,9 +24,12 @@ const Login = ({ handleToken }) => {
       navigate("/");
       //   console.log(response.data);
     } catch (error) {
-      console.log(error.response);
+      if (error.response.status === 401 || error.response.status === 400) {
+        setErrorMessage("Wrong email and/or password");
+      }
     }
   };
+
   return (
     <div className="form-container">
       <h2>Log in</h2>

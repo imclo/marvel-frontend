@@ -111,8 +111,11 @@ function App() {
             path="/favorites"
             element={<Favorites favorites={favorites} />}
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login handleToken={handleToken} />} />
+          <Route
+            path="/signup"
+            element={<Signup handleToken={handleToken} />}
+          />
         </Routes>
         <Footer />
       </Router>

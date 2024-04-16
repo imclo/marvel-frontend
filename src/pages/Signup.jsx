@@ -29,7 +29,13 @@ const Signup = ({ handleToken }) => {
 
       console.log(response.data);
     } catch (error) {
-      console.log(error.response);
+      if (error.response.data.message === "Missing parameters") {
+        setErrorMessage("Please fill in all fields");
+      } else if (error.response.status === 409) {
+        setErrorMessage(
+          "This email already has an account, please use another one 🙂 "
+        );
+      }
     }
   };
 
@@ -57,7 +63,6 @@ const Signup = ({ handleToken }) => {
         ></input>
 
         <input className="btn-valid" value="Sign up" type="submit" />
-
         {errorMessage && (
           <p className="email-used" style={{ color: "red" }}>
             {errorMessage}

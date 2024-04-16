@@ -23,10 +23,10 @@ const Home = () => {
                 <img className="avengers" src={avengers} alt="" />
                 <img className="avengers-img" src={galaxy} alt="" />
               </div>
-              <div className="home-imgs">
+              {/* <div className="home-imgs">
                 <img className="comics" src={marvelComics} alt="" />
                 <img className="comics-img" src={comics} alt="" />
-              </div>
+              </div> */}
             </div>
             <div className="home-buttons">
               <Link to="/characters">
